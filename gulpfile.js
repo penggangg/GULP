@@ -1,4 +1,5 @@
 var gulp=require('gulp');
+var babel = require('gulp-babel');
 var uglify=require('gulp-uglify');
 var minifyCSS=require('gulp-minify-css');
 var browserSync = require('browser-sync').create();
@@ -11,6 +12,9 @@ var revCollector = require('gulp-rev-collector');
 var runSequence = require('run-sequence');
 gulp.task('jsAll',function(){
     gulp.src('view/static/jsAll/*.js')
+    .pipe(babel({
+        presets: ['es2015']
+    }))
     .pipe(uglify())
     .pipe(gulp.dest('view/static/js'))
 });
